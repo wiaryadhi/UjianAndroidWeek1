@@ -9,7 +9,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.app.DatePickerDialog
 import android.view.View
-import android.widget.ImageButton
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_check_in.*
@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_izin.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.sql.Time
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -132,6 +133,69 @@ class MainActivity : AppCompatActivity() {
         fos.write((bitmapData));
         fos.flush();
         fos.close();
+    }
+
+    fun datePicker(view: View) {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        val datSetListener = object : DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(
+                view: DatePicker,
+                year: Int,
+                monthOfYear: Int,
+                dayOfMonth: Int
+            ) {
+                c.set(Calendar.YEAR, year)
+                c.set(Calendar.MONTH, monthOfYear)
+                c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                val myFormat = "dd/MMM/yyyy"
+                val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
+                editTextDate!!.setText(sdf.format(c.getTime()))
+            }
+        }
+
+        DatePickerDialog(
+            this, datSetListener,
+            c.get(Calendar.YEAR),
+            c.get(Calendar.MONTH),
+            c.get(Calendar.DAY_OF_MONTH)
+        ).show()
+
+    }
+    fun datePicker2(view: View) {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        val datSetListener = object : DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(
+                view: DatePicker,
+                year: Int,
+                monthOfYear: Int,
+                dayOfMonth: Int
+            ) {
+                c.set(Calendar.YEAR, year)
+                c.set(Calendar.MONTH, monthOfYear)
+                c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+                val myFormat = "dd/MMM/yyyy"
+                val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
+                editTextDate2!!.setText(sdf.format(c.getTime()))
+            }
+        }
+
+        DatePickerDialog(
+            this, datSetListener,
+            c.get(Calendar.YEAR),
+            c.get(Calendar.MONTH),
+            c.get(Calendar.DAY_OF_MONTH)
+        ).show()
+
     }
 }
 

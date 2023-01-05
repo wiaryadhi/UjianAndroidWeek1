@@ -47,6 +47,7 @@ class IzinFragment : Fragment() {
     companion object {
         private val REQUEST_CODE_PERMISIONS = 999
         private val CAMERA_REQUEST = 998
+
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -96,7 +97,7 @@ class IzinFragment : Fragment() {
                         Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE
                     )
-                    requestPermissions(permissions,REQUEST_CODE_PERMISIONS)
+                    requestPermissions(permissions, REQUEST_CODE_PERMISIONS)
                 } else {
                     (activity as MainActivity).captureCamera2()
                 }
@@ -119,9 +120,15 @@ class IzinFragment : Fragment() {
             }
         })
         btnKirimIzin.setOnClickListener(View.OnClickListener {
-            Toast.makeText(context,"Data Izin Berhasil disimpan", Toast.LENGTH_LONG).show()
-            (activity as MainActivity).loadFragment(MenuFragment.newInstance("",""))
+            Toast.makeText(context, "Data Izin Berhasil disimpan", Toast.LENGTH_LONG).show()
+            (activity as MainActivity).loadFragment(MenuFragment.newInstance("", ""))
         })
+        Cal1.setOnClickListener((View.OnClickListener {
+            (activity as MainActivity).datePicker(it)
+        }))
+        Cal2.setOnClickListener((View.OnClickListener {
+            (activity as MainActivity).datePicker2(it)
+        }))
 
     }
 }
